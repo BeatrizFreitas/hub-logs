@@ -1,4 +1,4 @@
-package com.hub.errors;
+package br.com.hub.errors;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

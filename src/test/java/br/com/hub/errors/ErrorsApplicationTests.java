@@ -1,4 +1,4 @@
-package com.hub.errors;
+package br.com.hub.errors;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
