@@ -1,34 +1,24 @@
 package br.com.hub.errors.model;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
+import javax.validation.constraints.NotNull;
+import java.io.Serializable;
 import java.util.Date;
 
 @Entity
-public class Erro {
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-
-    private String level;
+public class Erro implements Serializable {
+    @EmbeddedId
+    private Long codigo;
     private String description;
-    private String origin;
+    @NotNull
     private Integer frequency;
-    private String colectedby;
-    private Date origin_date;
 
-    public Erro(){
-
+    public Long getCodigo() {
+        return codigo;
     }
 
-
-    public String getLevel() {
-        return level;
-    }
-
-    public void setLevel(String level) {
-        this.level = level;
+    public void setCodigo(Long codigo) {
+        this.codigo = codigo;
     }
 
     public String getDescription() {
@@ -39,14 +29,6 @@ public class Erro {
         this.description = description;
     }
 
-    public String getOrigin() {
-        return origin;
-    }
-
-    public void setOrigin(String origin) {
-        this.origin = origin;
-    }
-
     public Integer getFrequency() {
         return frequency;
     }
@@ -55,21 +37,12 @@ public class Erro {
         this.frequency = frequency;
     }
 
-    public String getColectedby() {
-        return colectedby;
+    public Erro(){
+
     }
 
-    public void setColectedby(String colectedby) {
-        this.colectedby = colectedby;
-    }
 
-    public Date getOrigin_date() {
-        return origin_date;
-    }
 
-    public void setOrigin_date(Date origin_date) {
-        this.origin_date = origin_date;
-    }
 
 }
 
