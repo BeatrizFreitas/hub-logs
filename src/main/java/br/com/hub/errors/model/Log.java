@@ -22,7 +22,7 @@ public class Log implements Serializable {
     @Column(name = "colected_by")
     private String colectedby;
 
-    private Log(){
+    public Log(){
 
     }
 
