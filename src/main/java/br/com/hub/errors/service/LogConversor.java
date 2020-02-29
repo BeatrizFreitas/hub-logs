@@ -20,9 +20,9 @@ public class LogConversor {
             LocalDate date  = checkData(logResource.getDate());
 
             log.setDate(date);
-            log.setColectedby(logResource.getColectedby());
+            log.setUser(logResource.getColectedby());
             log.setDescription(logResource.getDescription());
-            log.setErro(logResource.getErro());
+            log.setErrorCode(logResource.getErro());
             log.setOrigin(logResource.getOrigin());
 
             return log;

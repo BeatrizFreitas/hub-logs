@@ -15,8 +15,6 @@ import java.util.List;
 @RequestMapping(value="/api")
 
 public class LogController {
-    @Autowired
-    LogRepository logRepository;
 
     @Autowired
     private ManageLog serviceManage;

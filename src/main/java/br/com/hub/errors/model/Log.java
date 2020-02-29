@@ -6,21 +6,36 @@ import java.io.Serializable;
 import java.time.LocalDate;
 
 @Entity
+@Table(name = "TB_LOG")
 public class Log implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
     @NotNull
-    private String erro;
+    private String errorCode;
+
+    /*@NotNull COMENTAR COM O BRUNO
+    private String errorLevel;*/
+
+    @NotNull
     private String description;
+
+    @NotNull
     private LocalDate date;
 
     @NotNull
     private String origin;
+
     @NotNull
-    @Column(name = "colected_by")
-    private String colectedby;
+    private int frequency;
+
+    @NotNull
+    private String stage;
+
+    @NotNull
+    @OneToOne
+    private String user;
 
     public Log(){
 
@@ -34,20 +49,12 @@ public class Log implements Serializable {
         this.id = id;
     }
 
-    public LocalDate getDate() {
-        return date;
+    public String getErrorCode() {
+        return errorCode;
     }
 
-    public void setDate(LocalDate date) {
-        this.date = date;
-    }
-
-    public String getErro() {
-        return erro;
-    }
-
-    public void setErro(String erro) {
-        this.erro = erro;
+    public void setErrorCode(String errorCode) {
+        this.errorCode = errorCode;
     }
 
     public String getDescription() {
@@ -58,6 +65,14 @@ public class Log implements Serializable {
         this.description = description;
     }
 
+    public LocalDate getDate() {
+        return date;
+    }
+
+    public void setDate(LocalDate date) {
+        this.date = date;
+    }
+
     public String getOrigin() {
         return origin;
     }
@@ -66,13 +81,27 @@ public class Log implements Serializable {
         this.origin = origin;
     }
 
-    public String getColectedby() {
-        return colectedby;
+    public int getFrequency() {
+        return frequency;
     }
 
-    public void setColectedby(String colectedby) {
-        this.colectedby = colectedby;
+    public void setFrequency(int frequency) {
+        this.frequency = frequency;
     }
 
+    public String getStage() {
+        return stage;
+    }
 
+    public void setStage(String stage) {
+        this.stage = stage;
+    }
+
+    public String getUser() {
+        return user;
+    }
+
+    public void setUser(String user) {
+        this.user = user;
+    }
 }
