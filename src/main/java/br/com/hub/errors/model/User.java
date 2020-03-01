@@ -1,10 +1,14 @@
 package br.com.hub.errors.model;
 
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
-import java.util.List;
 
+@Data
+@NoArgsConstructor
 @Entity
 @Table(name = "TB_USER")
 public class User implements Serializable {
@@ -27,9 +31,8 @@ public class User implements Serializable {
 
     @NotNull
     private String token;
-
-    @OneToMany
-    private List<String> logList;
+    // o tipo correto seria lista/ mas ainda esta dando erro no banco
+    private String logList;
 
     public Long getId() {
         return id;
@@ -79,11 +82,11 @@ public class User implements Serializable {
         this.token = token;
     }
 
-    public List<String> getLogList() {
+    public String getLogList() {
         return logList;
     }
 
-    public void setLogList(List<String> logList) {
+    public void setLogList(String logList) {
         this.logList = logList;
     }
 }
