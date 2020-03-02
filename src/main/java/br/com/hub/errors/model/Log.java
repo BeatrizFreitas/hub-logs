@@ -20,7 +20,7 @@ import java.util.UUID;
 @Table(name = "TB_LOG")
 public class Log implements Serializable {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private UUID id;
 
     private ErrorLevelsEnum errorLevel;
