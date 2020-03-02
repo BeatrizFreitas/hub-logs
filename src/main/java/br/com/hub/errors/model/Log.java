@@ -1,5 +1,7 @@
 package br.com.hub.errors.model;
 
+import br.com.hub.errors.model.Enum.ErrorLevelsEnum;
+import br.com.hub.errors.model.Enum.StagesEnum;
 import lombok.Data;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -9,6 +11,7 @@ import javax.persistence.*;
 
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.util.UUID;
 
 
 @Data
@@ -17,15 +20,17 @@ import java.time.LocalDate;
 @Table(name = "TB_LOG")
 public class Log implements Serializable {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private UUID id;
 
-    private String errorCode;
-//    private String errorLevel;
+    private ErrorLevelsEnum errorLevel;
     private String description;
     private LocalDate date;
     private String origin;
     private int frequency;
-    private String stage;
+    private StagesEnum stage;
     private String userName;
+
+    /*@OneToOne
+    private User user;*/
 }
