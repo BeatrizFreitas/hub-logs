@@ -4,8 +4,10 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import javax.validation.constraints.Email;
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
+import java.util.UUID;
 
 @Data
 @NoArgsConstructor
@@ -15,7 +17,7 @@ public class User implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
+    private UUID id;
 
     @NotNull
     private String name;
@@ -24,6 +26,7 @@ public class User implements Serializable {
     private String lastName;
 
     @NotNull
+    @Email
     private String email;
 
     @NotNull
@@ -34,11 +37,11 @@ public class User implements Serializable {
     // o tipo correto seria lista/ mas ainda esta dando erro no banco
     private String logList;
 
-    public Long getId() {
+    public UUID getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(UUID id) {
         this.id = id;
     }
 

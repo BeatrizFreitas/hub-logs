@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 
 @Service
 public class LogService {
@@ -32,5 +33,5 @@ public class LogService {
         return listLogs;
     }
 
-    public Optional<Log> get(Long id) {return logRepository.findById(id);}
+    public Optional<Log> get(UUID id) {return logRepository.findById(id);}
 }
