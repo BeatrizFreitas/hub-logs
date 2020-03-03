@@ -1,14 +1,9 @@
 package br.com.hub.errors.service;
 
-import br.com.hub.errors.exception.LogResourceException;
 import br.com.hub.errors.model.Log;
 import br.com.hub.errors.repository.LogRepository;
-import br.com.hub.errors.resource.DTO.LogDTO;
 import org.jboss.logging.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -26,8 +21,11 @@ public class LogService {
     }
 
     public List<Log> getLogsList(){
-//        PageRequest pageReq
-//                = PageRequest.of(page, size, Sort.Direction.fromString(sortDir), sort);
+        //TODO: implementar paginçao quando retornar o getall
+
+        // PageRequest pageReq
+        //          = PageRequest.of(page, size, Sort.Direction.fromString(sortDir), sort);
+
         List listLogs = logRepository.findAll();
 
         return listLogs;

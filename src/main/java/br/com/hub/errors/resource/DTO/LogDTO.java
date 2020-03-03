@@ -1,20 +1,18 @@
 package br.com.hub.errors.resource.DTO;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
+import br.com.hub.errors.model.enum_model.ErrorLevelsEnum;
 import lombok.Data;
-import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
 import javax.validation.constraints.NotNull;
+import java.util.UUID;
 
 @Data
 @NoArgsConstructor
 public class LogDTO {
 
-    private String id;
+    private UUID id;
     @NotNull
-    private String errorCode;
-    @NotNull
+    private ErrorLevelsEnum errorLevel;
     private String description;
 
 }

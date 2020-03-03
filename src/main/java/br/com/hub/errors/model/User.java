@@ -19,21 +19,14 @@ public class User implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private UUID id;
 
-    @Column
     private String name;
 
-    @Column(name = "lastName")
+    @Column
     private String lastName;
-
-    @Column
     private String email;
-
-    @Column
     private String password;
-
-    @Column
     private String token;
 
-    @OneToMany(mappedBy = "user")
-    private List<Log> logList;
+    //@OneToMany(mappedBy = "user")
+    //private List<Log> logList;
 }

@@ -1,7 +1,7 @@
 package br.com.hub.errors.model;
 
-import br.com.hub.errors.model.Enum.ErrorLevelsEnum;
-import br.com.hub.errors.model.Enum.StagesEnum;
+import br.com.hub.errors.model.enum_model.ErrorLevelsEnum;
+import br.com.hub.errors.model.enum_model.StagesEnum;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -23,25 +23,16 @@ public class Log implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private UUID id;
 
-    @Column(name = "errorLevel")
+    @Enumerated(EnumType.STRING)
+    @Column
     private ErrorLevelsEnum errorLevel;
-
-    @Column
     private String description;
-
-    @Column
     private LocalDate date;
-
-    @Column
     private String origin;
-
-    @Column
     private Integer frequency;
-
-    @Column
     private StagesEnum stage;
 
-    @ManyToOne(cascade=CascadeType.ALL)
-    @JoinColumn(name = "userId", referencedColumnName = "id") //nullable=false
-    private User user;
+    //@ManyToOne(cascade=CascadeType.ALL)
+    //@JoinColumn(name = "userId", referencedColumnName = "id") //nullable=false
+    //private User user;
 }
