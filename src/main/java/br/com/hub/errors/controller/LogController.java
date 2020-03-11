@@ -1,15 +1,23 @@
 package br.com.hub.errors.controller;
 
 import br.com.hub.errors.model.Log;
-import br.com.hub.errors.resource.DTO.LogDTO;
+import br.com.hub.errors.dto.LogDTO;
+import br.com.hub.errors.model.enum_model.EnvironmentEnum;
+import br.com.hub.errors.model.enum_model.ErrorLevelsEnum;
 import br.com.hub.errors.service.LogService;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
+
+import javax.persistence.Column;
 import javax.validation.Valid;
+import java.time.LocalDate;
 import java.util.List;
+import java.util.Map;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @RestController
@@ -27,6 +35,16 @@ public class LogController {
     public List<LogDTO> getLogs(){
 
         List<Log> logs = logService.getLogsList();
+        return logs.stream()
+                .map(this::convertToDto)
+                .collect(Collectors.toList());
+    }
+
+    //o find_by pode ser usado para: ambiente/level/description/origin
+    @GetMapping("/logs/find_by")
+    @ResponseBody
+    public List<LogDTO> getLogs(@RequestParam Map<String,String> allParams) {
+        List<Log> logs = logService.find_by(allParams);
         return logs.stream()
                 .map(this::convertToDto)
                 .collect(Collectors.toList());

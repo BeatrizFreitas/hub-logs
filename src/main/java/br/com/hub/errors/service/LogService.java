@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -29,6 +30,10 @@ public class LogService {
         List listLogs = logRepository.findAll();
 
         return listLogs;
+    }
+
+    public List<Log> find_by(Map<String, String> allParams){
+        return logRepository.findBy(allParams);
     }
 
     public Optional<Log> get(UUID id) {return logRepository.findById(id);}

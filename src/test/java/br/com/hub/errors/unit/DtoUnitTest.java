@@ -3,7 +3,7 @@ package br.com.hub.errors.unit;
 import br.com.hub.errors.model.enum_model.ErrorLevelsEnum;
 import br.com.hub.errors.model.Log;
 import java.util.UUID;
-import br.com.hub.errors.resource.DTO.LogDTO;
+import br.com.hub.errors.dto.LogDTO;
 import org.junit.jupiter.api.Test;
 import org.modelmapper.ModelMapper;
 
