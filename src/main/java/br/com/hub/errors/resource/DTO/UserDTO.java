@@ -1,7 +1,6 @@
 package br.com.hub.errors.resource.DTO;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
+import lombok.*;
 
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotNull;
@@ -9,7 +8,10 @@ import javax.validation.constraints.Size;
 import java.util.UUID;
 
 @Data
+@Getter
+@Setter
 @AllArgsConstructor
+@NoArgsConstructor
 public class UserDTO {
 
     //Verificar se/por que precisa ter no DTO
