@@ -30,7 +30,7 @@ public class SwaggerConfig {
 
     private ApiInfo apiInfo() {
         return new ApiInfoBuilder()
-                .title("Central de Erros API REST")
+                .title("Central de Erros")
                 .description("API para Aplicação e Logs de Central de Erros")
                 .version("1.0.0")
                 .license("Apache License Version 2.0")
