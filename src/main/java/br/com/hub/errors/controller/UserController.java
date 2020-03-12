@@ -4,6 +4,7 @@ import br.com.hub.errors.model.User;
 import br.com.hub.errors.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -24,8 +25,8 @@ public class UserController {
     }
 
     @GetMapping("/user/{id}")
-    public Optional<User> findById(UUID id){
-        return  userService.findById(id);
+    public Optional<User> findById(@PathVariable(value = "id") UUID id){
+        return userService.findById(id);
     }
 
 }
