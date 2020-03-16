@@ -1,7 +1,7 @@
 package br.com.hub.errors.controller;
 
 import br.com.hub.errors.model.Log;
-import br.com.hub.errors.resource.DTO.LogDTO;
+import br.com.hub.errors.dto.LogDTO;
 import br.com.hub.errors.service.LogService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;

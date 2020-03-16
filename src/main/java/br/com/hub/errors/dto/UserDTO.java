@@ -1,4 +1,4 @@
-package br.com.hub.errors.resource.DTO;
+package br.com.hub.errors.dto;
 
 import lombok.*;
 
@@ -13,9 +13,7 @@ import java.util.UUID;
 @AllArgsConstructor
 @NoArgsConstructor
 public class UserDTO {
-
-    //Verificar se/por que precisa ter no DTO
-    //private UUID id;
+    private UUID id;
 
     @NotNull
     @Size(min = 3)
@@ -32,6 +30,5 @@ public class UserDTO {
     @NotNull
     private String password;
 
-    //Verificar se/por que precisa ter no DTO
-    //private String token;
+    private String token;
 }

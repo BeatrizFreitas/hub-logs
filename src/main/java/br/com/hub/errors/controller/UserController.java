@@ -1,7 +1,7 @@
 package br.com.hub.errors.controller;
 
 import br.com.hub.errors.model.User;
-import br.com.hub.errors.resource.DTO.UserDTO;
+import br.com.hub.errors.dto.UserDTO;
 import br.com.hub.errors.service.UserService;
 import io.swagger.annotations.ApiOperation;
 import org.modelmapper.ModelMapper;

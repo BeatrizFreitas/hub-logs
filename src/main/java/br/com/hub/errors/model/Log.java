@@ -26,13 +26,18 @@ public class Log implements Serializable {
     @Enumerated(EnumType.STRING)
     @Column
     private ErrorLevelsEnum errorLevel;
+    @Column
     private String description;
+    @Column
     private LocalDate date;
+    @Column
     private String origin;
+    @Column
     private Integer frequency;
+    @Column
     private StagesEnum stage;
 
-    //@ManyToOne(cascade=CascadeType.ALL)
-    //@JoinColumn(name = "userId", referencedColumnName = "id") //nullable=false
-    //private User user;
+    @ManyToOne(cascade=CascadeType.ALL)
+    @JoinColumn(name = "userId", referencedColumnName = "id") //nullable=false
+    private User user;
 }
