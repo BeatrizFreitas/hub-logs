@@ -4,9 +4,13 @@ import br.com.hub.errors.model.Log;
 import br.com.hub.errors.repository.LogRepository;
 import org.jboss.logging.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -21,15 +25,11 @@ public class LogService {
     }
 
     public List<Log> getLogsList(){
-        //TODO: implementar paginçao quando retornar o getall
-
-        // PageRequest pageReq
-        //          = PageRequest.of(page, size, Sort.Direction.fromString(sortDir), sort);
-
         List listLogs = logRepository.findAll();
-
         return listLogs;
     }
 
-    public Optional<Log> get(UUID id) {return logRepository.findById(id);}
+    public Page<Log> findAll(Specification<Log> logSpec, Pageable pageable) {
+        return logRepository.findAll(logSpec, pageable);
+    }
 }
