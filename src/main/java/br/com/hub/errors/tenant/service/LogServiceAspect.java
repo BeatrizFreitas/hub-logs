@@ -11,8 +11,8 @@ import javax.websocket.Session;
 
 @Aspect
 @Component
-public class CityServiceAspect {
-    @Before("execution(* com.example.service.discriminator.CityService.*(..))&& target(cityService) ")
+public class LogServiceAspect {
+    @Before("execution(* br.com.hub.errors.service.LogService.*(..))&& target(logService) ")
     public void aroundExecution(JoinPoint pjp, LogService logService) throws Throwable {
         org.hibernate.Filter filter = logService.entityManager.unwrap(Session.class).enableFilter("tenantFilter");
         filter.setParameter("tenantId", TenantContext.getCurrentTenant());
