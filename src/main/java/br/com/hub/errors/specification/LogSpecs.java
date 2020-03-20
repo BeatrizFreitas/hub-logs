@@ -3,6 +3,8 @@ package br.com.hub.errors.specification;
 import br.com.hub.errors.model.Log;
 
 import br.com.hub.errors.model.Log_;
+import br.com.hub.errors.model.enum_model.EnvironmentEnum;
+import br.com.hub.errors.model.enum_model.ErrorLevelsEnum;
 import org.springframework.data.jpa.domain.Specification;
 
 import javax.persistence.criteria.CriteriaBuilder;
@@ -29,12 +31,12 @@ public class LogSpecs {
                 if (params.get("date") != null && !params.get("date").isEmpty()) {
                     predicates.add(criteriaBuilder.equal(root.get("date"), params.get("date")));
                 }
-//                if (params.get("errorLevel") != null && !params.get("errorLevel").isEmpty()) {
-//                    predicates.add(criteriaBuilder.equal(root.get(Log_.errorLevel), params.get("errorLevel")));
-//                }
-//                if (params.get("environment") != null && !params.get("environment").isEmpty()) {
-//                    this.environmentPredicate = criteriaBuilder.equal(root.get(Log_.environment), params.get("environment"));
-//                }
+               if (params.get("errorLevel") != null && !params.get("errorLevel").isEmpty()) {
+                    predicates.add(criteriaBuilder.equal(root.get(Log_.errorLevel), ErrorLevelsEnum.valueOf(params.get("errorLevel"))));
+                }
+                if (params.get("environment") != null && !params.get("environment").isEmpty()) {
+                    predicates.add(criteriaBuilder.equal(root.get(Log_.environment), EnvironmentEnum.valueOf(params.get("environment"))));
+                }
 
                 Predicate predicateForFilters = criteriaBuilder.and(predicates.toArray(new Predicate[predicates.size()]));
 
