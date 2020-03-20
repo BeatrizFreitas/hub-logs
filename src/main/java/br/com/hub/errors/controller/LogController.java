@@ -17,8 +17,12 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.Optional;
 import java.util.stream.Collectors;
+
 
 @RestController
 @RequestMapping(value="/api")
@@ -42,7 +46,7 @@ public class LogController {
                 .collect(Collectors.toList());
     }
 
-    @PostMapping("/log")
+    @PostMapping("/logs")
     @ApiOperation(value = "Cria um novo Log")
     @ResponseStatus(HttpStatus.CREATED)
     @ResponseBody
@@ -53,15 +57,12 @@ public class LogController {
     }
 
     @GetMapping("/logs/find_by")
-    @ResponseBody
-    public Page<Log> findLogs(@And({
-            @Spec(path = "errorLevel", spec = Like.class),
-            @Spec(path = "origin", spec = Like.class),
-            @Spec(path = "stage", spec = Like.class)
-    }) Specification<Log> LogSpec,
-                              Pageable pageable) {
+    public List<LogDTO> findLogs(@RequestParam Map<String,String> allParams) {
+        List<Log> logs = logService.findAllFilters((Map<String, String>) allParams);
 
-        return logService.findAll(LogSpec, pageable);
+        return logs.stream()
+                .map(this::convertToDto)
+                .collect(Collectors.toList());
     }
 
     private LogDTO convertToDto(Log log) {
