@@ -58,8 +58,7 @@ public class LogController {
 
     @GetMapping("/logs/find_by")
     public List<LogDTO> findLogs(@RequestParam Map<String,String> allParams) {
-        List<Log> logs = logService.findAllFilters((Map<String, String>) allParams);
-
+        List<Log> logs = logService.findAllFilters(allParams);
         return logs.stream()
                 .map(this::convertToDto)
                 .collect(Collectors.toList());
