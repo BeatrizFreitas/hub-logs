@@ -5,19 +5,15 @@ import br.com.hub.errors.dto.LogDTO;
 import br.com.hub.errors.service.LogService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
-import net.kaczmarzyk.spring.data.jpa.domain.Like;
-import net.kaczmarzyk.spring.data.jpa.web.annotation.And;
-import net.kaczmarzyk.spring.data.jpa.web.annotation.Spec;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
-import org.springframework.data.jpa.domain.Specification;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 @RestController
@@ -34,15 +30,15 @@ public class LogController {
     @GetMapping("/logs")
     @ApiOperation(value = "Retorna uma lista de Logs")
     @ResponseBody
-    public List<LogDTO> getLogs(){
+    public List<LogDTO> getAllLogs(){
 
-        List<Log> logs = logService.getLogsList();
+        List<Log> logs = logService.getAllLogs();
         return logs.stream()
                 .map(this::convertToDto)
                 .collect(Collectors.toList());
     }
 
-    @PostMapping("/log")
+    @PostMapping("/logs")
     @ApiOperation(value = "Cria um novo Log")
     @ResponseStatus(HttpStatus.CREATED)
     @ResponseBody
@@ -54,15 +50,33 @@ public class LogController {
 
     @GetMapping("/logs/find_by")
     @ResponseBody
-    public Page<Log> findLogs(@And({
-            @Spec(path = "errorLevel", spec = Like.class),
-            @Spec(path = "origin", spec = Like.class),
-            @Spec(path = "stage", spec = Like.class)
-    }) Specification<Log> LogSpec,
-                              Pageable pageable) {
+    public List<LogDTO> getLogs(@RequestParam Map<String,String> allParams) {
+        HashMap<String, String> params = getParams(allParams);
 
-        return logService.findAll(LogSpec, pageable);
+        List<Log> logs = logService.getLog(params);
+        return logs.stream()
+                .map(this::convertToDto)
+                .collect(Collectors.toList());
     }
+
+    private HashMap<String, String> getParams(Map<String, String> allParams) {
+        HashMap<String, String> params = new HashMap<String, String>();
+        if (allParams.get("frequency") != null){
+            params.put("frequency", allParams.get("frequency"));
+        } else if (allParams.get("errorLevel") != null){
+            params.put("errorLevel", allParams.get("errorLevel"));
+        }else if (allParams.get("date") != null){
+            params.put("date", allParams.get("date"));
+        }else if (allParams.get("origin") != null){
+            params.put("origin", allParams.get("origin"));
+        }else if (allParams.get("stage") != null){
+            params.put("stage", allParams.get("stage"));
+        }else {
+//            TODO: INCLUIR LOG DE QUE O PARAMETRO NAO FOI ENCONTRADO
+        }
+        return params;
+    }
+
 
     private LogDTO convertToDto(Log log) {
         LogDTO logDto = modelMapper.map(log, LogDTO.class);

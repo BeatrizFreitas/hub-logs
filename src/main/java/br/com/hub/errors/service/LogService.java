@@ -4,15 +4,9 @@ import br.com.hub.errors.model.Log;
 import br.com.hub.errors.repository.LogRepository;
 import org.jboss.logging.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
-import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
-import java.util.UUID;
+import java.util.*;
 
 @Service
 public class LogService {
@@ -24,12 +18,34 @@ public class LogService {
         return logRepository.save(log);
     }
 
-    public List<Log> getLogsList(){
+    public List<Log> getAllLogs(){
         List listLogs = logRepository.findAll();
         return listLogs;
     }
 
-    public Page<Log> findAll(Specification<Log> logSpec, Pageable pageable) {
-        return logRepository.findAll(logSpec, pageable);
+    public List<Log> getLog(HashMap<String, String> params) {
+        StringBuilder newQuery = generateQuery(params);
+        List listLogs = logRepository.find_by(newQuery);
+        return listLogs;
     }
+
+    private StringBuilder generateQuery(HashMap<String, String> params) {
+        StringBuilder sql = new StringBuilder();
+        final int[] aux = {0};
+
+        sql.append("SELECT * FROM TABLE");
+        if(params != null) {
+            sql.append(" WHERE ");
+            params.forEach((k,v)->{
+                if (aux[0] != 0){
+                    sql.append(" AND " + k + " = " + v);
+                } else {
+                    sql.append(k + " = " + v);
+                    aux[0] = 1;
+                }
+            });
+        }
+        return sql;
+    }
+
 }
