@@ -6,23 +6,14 @@ import br.com.hub.errors.service.LogService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
-import io.swagger.annotations.ApiResponses;
-import net.kaczmarzyk.spring.data.jpa.domain.Like;
-import net.kaczmarzyk.spring.data.jpa.web.annotation.And;
-import net.kaczmarzyk.spring.data.jpa.web.annotation.Spec;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
-import org.springframework.data.jpa.domain.Specification;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 
@@ -37,7 +28,7 @@ public class LogController {
     private ModelMapper modelMapper;
 
     @GetMapping("/logs")
-    @ApiOperation(value = "Retorna uma lista de Logs")
+    @ApiOperation(value = "Returns a list of logs")
     @ResponseBody
     public List<LogDTO> getLogs(){
 
@@ -48,7 +39,7 @@ public class LogController {
     }
 
     @PostMapping("/logs")
-    @ApiOperation(value = "Cria um novo Log")
+    @ApiOperation(value = "Creates a new log")
     @ApiResponse(code = 201, message = "Log salvo com sucesso", response = LogDTO.class)
     @ResponseStatus(HttpStatus.CREATED)
     public LogDTO saveLog(@Valid @RequestBody LogDTO logDto){
@@ -58,7 +49,7 @@ public class LogController {
     }
 
     @GetMapping("/logs/find_by")
-    @ApiOperation(value = "Retornar uma lista de logs de acordo com os filtros requisitados")
+    @ApiOperation(value = "Return a list of logs according to the requested filters")
     public List<LogDTO> findLogs(@RequestParam Map<String,String> allParams) {
         List<Log> logs = logService.findAllFilters(allParams);
         return logs.stream()

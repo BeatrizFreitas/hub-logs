@@ -2,7 +2,6 @@ package br.com.hub.errors.dto;
 
 import br.com.hub.errors.model.enum_model.ErrorLevelsEnum;
 import br.com.hub.errors.model.enum_model.EnvironmentEnum;
-import lombok.Data;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -12,7 +11,6 @@ import javax.persistence.Column;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.util.UUID;
 
 @Getter

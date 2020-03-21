@@ -22,9 +22,6 @@ public class LogSpecs {
 
             @Override
             public Predicate toPredicate(Root<Log> root, CriteriaQuery<?> criteriaQuery, CriteriaBuilder criteriaBuilder) {
-                if (params.get("frequency") != null && !params.get("frequency").isEmpty()) {
-                    predicates.add(criteriaBuilder.equal(root.get("frequency"), params.get("frequency")));
-                }
                 if (params.get("origin") != null && !params.get("origin").isEmpty()) {
                     predicates.add(criteriaBuilder.equal(root.get("origin"), params.get("origin")));
                 }
@@ -39,6 +36,7 @@ public class LogSpecs {
                 }
 
                 Predicate predicateForFilters = criteriaBuilder.and(predicates.toArray(new Predicate[predicates.size()]));
+
 
                 return predicateForFilters;
             }
