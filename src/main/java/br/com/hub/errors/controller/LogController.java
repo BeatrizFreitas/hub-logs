@@ -5,6 +5,8 @@ import br.com.hub.errors.dto.LogDTO;
 import br.com.hub.errors.service.LogService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiResponse;
+import io.swagger.annotations.ApiResponses;
 import net.kaczmarzyk.spring.data.jpa.domain.Like;
 import net.kaczmarzyk.spring.data.jpa.web.annotation.And;
 import net.kaczmarzyk.spring.data.jpa.web.annotation.Spec;
@@ -27,7 +29,6 @@ import java.util.stream.Collectors;
 @RestController
 @RequestMapping(value="/api")
 @Api(value = "Central de Erros")
-@CrossOrigin(origins = "*") //O * libera para que qualquer domínio possa acessar a API
 public class LogController {
     @Autowired
     private LogService logService;
@@ -48,8 +49,8 @@ public class LogController {
 
     @PostMapping("/logs")
     @ApiOperation(value = "Cria um novo Log")
+    @ApiResponse(code = 201, message = "Log salvo com sucesso", response = LogDTO.class)
     @ResponseStatus(HttpStatus.CREATED)
-    @ResponseBody
     public LogDTO saveLog(@Valid @RequestBody LogDTO logDto){
         Log log = convertToEntity(logDto);
         Log logCreated = logService.registerLog(log);
@@ -57,6 +58,7 @@ public class LogController {
     }
 
     @GetMapping("/logs/find_by")
+    @ApiOperation(value = "Retornar uma lista de logs de acordo com os filtros requisitados")
     public List<LogDTO> findLogs(@RequestParam Map<String,String> allParams) {
         List<Log> logs = logService.findAllFilters(allParams);
         return logs.stream()
