@@ -26,11 +26,11 @@ public class WebSecurityConfigAdapter extends WebSecurityConfigurerAdapter {
         if (userRepository.count() == 0) {
             User user = new User();
             user.setEmail("admin_teste_squad3@gmail.com");
-            user.setPassword(passwordEncoder().encode("@password"));
+            user.setPassword("@password");
             userRepository.save(user);
         }
 
-        builder.userDetailsService(email -> new UserDTO(userRepository.findByLogin(email))).passwordEncoder(passwordEncoder());
+        builder.userDetailsService(email -> new UserDTO(userRepository.findByLogin(email)));
     }
 
     @Bean

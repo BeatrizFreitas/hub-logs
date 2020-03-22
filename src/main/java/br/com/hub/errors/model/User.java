@@ -24,6 +24,7 @@ public class User implements Serializable {
     private String email;
     private String password;
     private String token;
+    private String login;
 
     //@OneToMany(mappedBy = "user")
     //private List<Log> logList;
