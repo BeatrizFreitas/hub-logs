@@ -5,7 +5,6 @@ import br.com.hub.errors.repository.LogRepository;
 import br.com.hub.errors.specification.LogSpecs;
 import org.jboss.logging.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 

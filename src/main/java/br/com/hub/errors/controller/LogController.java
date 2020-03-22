@@ -68,19 +68,10 @@ public class LogController {
                 .collect(Collectors.toList());
     }
 
-    private LogDTO convertToDto(Log log) {
-        LogDTO logDto = modelMapper.map(log, LogDTO.class);
-        return logDto;
-    }
+    private LogDTO convertToDto(Log log) { return modelMapper.map(log, LogDTO.class); }
 
-    private Log convertToEntity(LogDTO logDto) {
-        Log log = modelMapper.map(logDto, Log.class);
-        return log;
-    }
+    private Log convertToEntity(LogDTO logDto) { return modelMapper.map(logDto, Log.class); }
 
-    private static String getParameterSort(Map<String, String> params) {
-        String filterBy = params.get("order_by");
-        return filterBy;
-    }
+    private static String getParameterSort(Map<String, String> params) { return params.get("order_by");}
 
 }
