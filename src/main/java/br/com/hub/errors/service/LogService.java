@@ -5,10 +5,9 @@ import br.com.hub.errors.repository.LogRepository;
 import br.com.hub.errors.specification.LogSpecs;
 import org.jboss.logging.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Sort;
+import org.springframework.data.domain.*;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
 import java.util.Map;
 
 @Service
@@ -28,40 +27,45 @@ public class LogService {
         return log;
     }
 
-    public List<Log> getLogsList(){
-        List<Log> listLogs = null;
+    public Page<Log> getLogsList(int page, int size){
+        Page<Log> pageResult = null;
         try {
-            listLogs = logRepository.findAll();
+            Pageable paging = PageRequest.of(page, size);
+            pageResult = logRepository.findAll(paging);
             LOG.info("Search performed");
-            LOG.info(listLogs);
+            LOG.info(pageResult);
         } catch (Exception e){
             LOG.error(e);
         }
-        return listLogs;
+        return pageResult;
     }
 
-    public List<Log> filterLogs(Map<String, String> params) {
-        List<Log> listLog = null;
+    public Page<Log> filterLogs(Map<String, String> params, int page, int size) {
+        Page<Log> pageResult = null;
         try{
             LOG.info("Getting logs with parameters");
-            listLog = logRepository.findAll(LogSpecs.getLogsByFilters(params));
-            LOG.info("Logs retrivied" + listLog);
+            Pageable paging = PageRequest.of(page, size);
+            pageResult = logRepository.findAll(LogSpecs.getLogsByFilters(params), paging);
+            LOG.info("Logs retrivied" + pageResult);
         } catch (Exception e){
             LOG.error(e);
         }
-        return listLog;
+        return pageResult;
     }
 
-    public List<Log> sortLogs(String param) {
-        List<Log> listLog = null;
+    public Page<Log> sortLogs(String param, int page, int size) {
+        Page<Log> pageResult = null;
         try{
             LOG.info("Order logs by parameter:" + param);
-            listLog =  logRepository.findAll(Sort.by(param).ascending());
-            LOG.info("Logs retrivied" + listLog);
+            Pageable paging = PageRequest.of(page, size, Sort.by(param).ascending());
+            pageResult = logRepository.findAll(paging);
+            LOG.info("Logs retrivied" + pageResult);
         } catch (Exception e){
             LOG.error(e);
         }
-        return listLog;
+
+        return pageResult;
     }
+
 
 }

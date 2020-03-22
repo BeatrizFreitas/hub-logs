@@ -8,6 +8,8 @@ import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
@@ -30,12 +32,15 @@ public class LogController {
     @GetMapping("/logs")
     @ApiOperation(value = "Returns a list of logs")
     @ResponseBody
-    public List<LogDTO> getLogs(){
+    public List<LogDTO> getLogs(@RequestParam(value = "page", required = false, defaultValue = "0") int page,
+                                 @RequestParam(value = "size", required = false, defaultValue = "10") int size){
 
-        List<Log> logs = logService.getLogsList();
-        return logs.stream()
+        Page<Log> logs = logService.getLogsList(page, size);
+        List<LogDTO> listLogdTO = logs.stream()
                 .map(this::convertToDto)
                 .collect(Collectors.toList());
+
+        return  listLogdTO;
     }
 
     @PostMapping("/logs")
@@ -50,22 +55,37 @@ public class LogController {
 
     @GetMapping("/logs/find_by")
     @ApiOperation(value = "Returns a list of logs according to the requested filters")
-    public List<LogDTO> findLogs(@RequestParam Map<String,String> allParams) {
-        List<Log> logs = logService.filterLogs(allParams);
-        return logs.stream()
+    public List<LogDTO> findLogs(@RequestParam Map<String,String> allParams,
+                                 @RequestParam(value = "page", required = false, defaultValue = "0") int page,
+                                 @RequestParam(value = "size", required = false, defaultValue = "10") int size) {
+
+        Page<Log> logs = logService.filterLogs(allParams, page, size);
+        List<LogDTO> listLogdTO = logs.stream()
                 .map(this::convertToDto)
                 .collect(Collectors.toList());
+
+        Page<LogDTO> pageLog = new PageImpl<>(listLogdTO);
+
+        return pageLog.getContent();
+
     }
 
     @GetMapping("/logs/order_by")
     @ApiOperation(value = "Returns an ordered list of logs")
-    public List<LogDTO> sortLogs(@RequestParam Map<String,String> allParams) {
+    public List<LogDTO> sortLogs(@RequestParam Map<String,String> allParams,
+                                 @RequestParam(value = "page", required = false, defaultValue = "0") int page,
+                                 @RequestParam(value = "size", required = false, defaultValue = "10") int size) {
         String paramName = getParameterSort(allParams);
 
-        List<Log> logs = logService.sortLogs(paramName);
-        return logs.stream()
+        Page<Log> logs = logService.sortLogs(paramName, page, size);
+
+        List<LogDTO> listLogdTO = logs.getContent().stream()
                 .map(this::convertToDto)
                 .collect(Collectors.toList());
+
+        Page<LogDTO> pageLog = new PageImpl<>(listLogdTO);
+
+        return pageLog.getContent();
     }
 
     private LogDTO convertToDto(Log log) { return modelMapper.map(log, LogDTO.class); }
