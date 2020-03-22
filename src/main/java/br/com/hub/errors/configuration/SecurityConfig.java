@@ -2,7 +2,7 @@ package br.com.hub.errors.configuration;
 
 import br.com.hub.errors.model.User;
 import br.com.hub.errors.repository.UserRepository;
-import br.com.hub.errors.resource.DTO.UserDTO;
+import br.com.hub.errors.dto.UserDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.http.HttpMethod;

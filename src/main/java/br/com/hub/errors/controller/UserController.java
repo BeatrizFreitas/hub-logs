@@ -1,7 +1,7 @@
 package br.com.hub.errors.controller;
 
 import br.com.hub.errors.model.User;
-import br.com.hub.errors.resource.DTO.UserDTO;
+import br.com.hub.errors.dto.UserDTO;
 import br.com.hub.errors.service.UserService;
 import io.swagger.annotations.ApiOperation;
 import org.modelmapper.ModelMapper;
@@ -25,19 +25,19 @@ public class UserController {
     private ModelMapper modelMapper;
 
     @GetMapping("/users")
-    @ApiOperation(value = "Retorna uma lista de usuários")
+    @ApiOperation(value = "Returns a list of users")
     public List<User> findAll() {
         return userService.findAll();
     }
 
     @GetMapping("/user/{id}")
-    @ApiOperation(value = "Retorna um usuário específico")
+    @ApiOperation(value = "Returns a user")
     public Optional<User> findById(@PathVariable(value = "id") UUID id) {
         return userService.findById(id);
     }
 
     @PostMapping("/user")
-    @ApiOperation(value = "Cria um novo usuário")
+    @ApiOperation(value = "Creates a new user registration")
     @ResponseStatus(HttpStatus.CREATED)
     @ResponseBody
     public UserDTO saveUser(@Valid @RequestBody UserDTO userDTO) {

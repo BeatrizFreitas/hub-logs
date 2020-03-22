@@ -1,4 +1,5 @@
-package br.com.hub.errors.resource.DTO;
+
+package br.com.hub.errors.dto;
 
 import br.com.hub.errors.model.User;
 import lombok.*;
@@ -11,34 +12,32 @@ import javax.validation.constraints.Size;
 import java.util.Collection;
 import java.util.UUID;
 
-@Data
-@AllArgsConstructor
+@Getter
+@Setter
 @NoArgsConstructor
 public class UserDTO implements UserDetails {
+    private UUID id;
 
-    //Verificar se/por que precisa ter no DTO
-    //private UUID id;
-
-    @NotNull
+    @NotNull(message = "Name is a required parameter")
     @Size(min = 3)
     private String name;
 
-    @NotNull
+    @NotNull(message = "Last Name is a required parameter")
     @Size(min = 2)
     private String lastName;
 
-    @NotNull
+    @NotNull(message = "Email is a required parameter")
     @Email
-    private String email;
+    private String login;
 
-    @NotNull
+    @NotNull(message = "Password is a required parameter")
+    @Size(min = 8)
     private String password;
 
-    //Verificar se/por que precisa ter no DTO
-    //private String token;
+    private String token;
 
     public UserDTO(User user){
-        this.email = user.getEmail();
+        this.login = user.getLogin();
         this.password = user.getPassword();
     }
 
@@ -54,7 +53,7 @@ public class UserDTO implements UserDetails {
 
     @Override
     public String getUsername() {
-        return this.email;
+        return this.login;
     }
 
     @Override
