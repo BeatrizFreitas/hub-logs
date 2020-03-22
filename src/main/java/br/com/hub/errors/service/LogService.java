@@ -5,6 +5,8 @@ import br.com.hub.errors.repository.LogRepository;
 import br.com.hub.errors.specification.LogSpecs;
 import org.jboss.logging.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -39,11 +41,24 @@ public class LogService {
         return listLogs;
     }
 
-
-    public List<Log> findAllFilters(Map<String, String> allParams) {
+    public List<Log> filterLogs(Map<String, String> params) {
         List<Log> listLog = null;
         try{
-            listLog = logRepository.findAll(LogSpecs.getLogsByFilters(allParams));
+            LOG.info("Getting logs with parameters");
+            listLog = logRepository.findAll(LogSpecs.getLogsByFilters(params));
+            LOG.info("Logs retrivied" + listLog);
+        } catch (Exception e){
+            LOG.error(e);
+        }
+        return listLog;
+    }
+
+    public List<Log> sortLogs(String param) {
+        List<Log> listLog = null;
+        try{
+            LOG.info("Order logs by parameter:" + param);
+            listLog =  logRepository.findAll(Sort.by(param).ascending());
+            LOG.info("Logs retrivied" + listLog);
         } catch (Exception e){
             LOG.error(e);
         }

@@ -49,9 +49,20 @@ public class LogController {
     }
 
     @GetMapping("/logs/find_by")
-    @ApiOperation(value = "Return a list of logs according to the requested filters")
+    @ApiOperation(value = "Returns a list of logs according to the requested filters")
     public List<LogDTO> findLogs(@RequestParam Map<String,String> allParams) {
-        List<Log> logs = logService.findAllFilters(allParams);
+        List<Log> logs = logService.filterLogs(allParams);
+        return logs.stream()
+                .map(this::convertToDto)
+                .collect(Collectors.toList());
+    }
+
+    @GetMapping("/logs/order_by")
+    @ApiOperation(value = "Returns an ordered list of logs")
+    public List<LogDTO> sortLogs(@RequestParam Map<String,String> allParams) {
+        String paramName = getParameterSort(allParams);
+
+        List<Log> logs = logService.sortLogs(paramName);
         return logs.stream()
                 .map(this::convertToDto)
                 .collect(Collectors.toList());
@@ -65,6 +76,11 @@ public class LogController {
     private Log convertToEntity(LogDTO logDto) {
         Log log = modelMapper.map(logDto, Log.class);
         return log;
+    }
+
+    private static String getParameterSort(Map<String, String> params) {
+        String filterBy = params.get("order_by");
+        return filterBy;
     }
 
 }

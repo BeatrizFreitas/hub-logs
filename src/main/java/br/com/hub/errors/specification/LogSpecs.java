@@ -5,6 +5,8 @@ import br.com.hub.errors.model.Log;
 import br.com.hub.errors.model.Log_;
 import br.com.hub.errors.model.enum_model.EnvironmentEnum;
 import br.com.hub.errors.model.enum_model.ErrorLevelsEnum;
+import br.com.hub.errors.service.LogService;
+import org.jboss.logging.Logger;
 import org.springframework.data.jpa.domain.Specification;
 
 import javax.persistence.criteria.CriteriaBuilder;
@@ -16,6 +18,8 @@ import java.util.List;
 import java.util.Map;
 
 public class LogSpecs {
+    private static final Logger LOG = Logger.getLogger(LogService.class);
+
     public static Specification<Log> getLogsByFilters(Map<String, String> params){
         return new Specification<Log>() {
             @Override
