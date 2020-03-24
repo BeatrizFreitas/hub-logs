@@ -15,6 +15,7 @@ import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 
+
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(securedEnabled = true)
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
@@ -22,13 +23,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Autowired
     UserDetailsServiceImpl userDetailsService;
 
+
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.csrf().disable().sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
-                .and().authorizeRequests().antMatchers("/oauth/token")
-                .permitAll().anyRequest().authenticated()
-                .and()
-                .authorizeRequests().antMatchers(HttpMethod.GET,"/user").hasRole("ADMIN");
+                //.and().authorizeRequests().antMatchers("/oauth/token").permitAll().anyRequest().authenticated()
+                .and().authorizeRequests().antMatchers(HttpMethod.POST,"/user").permitAll();
     }
 
     @Bean
