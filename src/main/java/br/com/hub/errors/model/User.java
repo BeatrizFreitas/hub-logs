@@ -6,7 +6,7 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.List;
+import java.time.LocalDateTime;
 import java.util.UUID;
 
 @Data
@@ -29,6 +29,8 @@ public class User implements Serializable {
     private String password;
     @Column
     private String token;
+    @Column
+    private LocalDateTime registrationDate;
 
     /*@OneToMany(mappedBy = "user")
     private List<Log> logList;*/
