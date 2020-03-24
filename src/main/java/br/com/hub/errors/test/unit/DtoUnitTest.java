@@ -1,13 +1,14 @@
-package br.com.hub.errors.unit;
+package br.com.hub.errors.test.unit;
 
-import br.com.hub.errors.model.enum_model.ErrorLevelsEnum;
-import br.com.hub.errors.model.Log;
-import java.util.UUID;
 import br.com.hub.errors.dto.LogDTO;
-import org.junit.jupiter.api.Test;
+import br.com.hub.errors.model.Log;
+import br.com.hub.errors.model.enum_model.ErrorLevelsEnum;
 import org.modelmapper.ModelMapper;
+import org.testng.Assert;
+import org.testng.annotations.Test;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import java.util.UUID;
+
 
 public class DtoUnitTest {
     private ModelMapper modelMapper = new ModelMapper();
@@ -22,9 +23,9 @@ public class DtoUnitTest {
         log.setDescription("teste");
 
         LogDTO logDto = modelMapper.map(log, LogDTO.class);
-        assertEquals(log.getId(), logDto.getId());
-        assertEquals(log.getErrorLevel(), logDto.getErrorLevel());
-        assertEquals(log.getDescription(), logDto.getDescription());
+        Assert.assertEquals(log.getId(), logDto.getId());
+        Assert.assertEquals(log.getErrorLevel(), logDto.getErrorLevel());
+        Assert.assertEquals(log.getDescription(), logDto.getDescription());
     }
 
     @Test
@@ -37,9 +38,9 @@ public class DtoUnitTest {
         logDto.setDescription("test");
 
         Log log = modelMapper.map(logDto, Log.class);
-        assertEquals(logDto.getId(), log.getId());
-        assertEquals(logDto.getErrorLevel(), log.getErrorLevel());
-        assertEquals(logDto.getDescription(), log.getDescription());
+        Assert.assertEquals(logDto.getId(), log.getId());
+        Assert.assertEquals(logDto.getErrorLevel(), log.getErrorLevel());
+        Assert.assertEquals(logDto.getDescription(), log.getDescription());
     }
 }
 
