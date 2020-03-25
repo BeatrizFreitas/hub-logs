@@ -33,7 +33,7 @@ public class OAuthConfiguration extends AuthorizationServerConfigurerAdapter {
     public void configure(ClientDetailsServiceConfigurer clients) throws Exception {
         clients.inMemory()
                 .withClient("client_id")
-                .secret(new BCryptPasswordEncoder().encode("secret"))
+                .secret(new BCryptPasswordEncoder().encode("client_secret"))
                 .authorizedGrantTypes("password", "authorization_code", "refresh_token")
                 .scopes("read","write")
                 .accessTokenValiditySeconds(600)

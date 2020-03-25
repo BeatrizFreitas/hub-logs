@@ -1,4 +1,4 @@
-package br.com.hub.errors.dto;
+package br.com.hub.errors.dto.request;
 
 import br.com.hub.errors.model.enum_model.ErrorLevelsEnum;
 import br.com.hub.errors.model.enum_model.EnvironmentEnum;
@@ -16,7 +16,7 @@ import java.util.UUID;
 @Getter
 @Setter
 @NoArgsConstructor
-public class LogDTO {
+public class LogDTORequest {
 
     private UUID id;
 

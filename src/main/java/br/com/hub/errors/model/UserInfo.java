@@ -10,6 +10,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.validation.constraints.Email;
 
 
 @Getter
@@ -26,7 +27,8 @@ public class UserInfo implements Serializable {
     private Integer id;
 
     @Column
-    private String userName;
+    @Email
+    private String userEmail;
     @Column
     private String password;
     @Column
@@ -36,7 +38,7 @@ public class UserInfo implements Serializable {
 
     @Override
     public String toString() {
-        return String.format("UserInfo [id=%s, userName=%s, password=%s, role=%s, enabled=%s]", id, userName, password,
+        return String.format("UserInfo [id=%s, userEmail=%s, password=%s, role=%s, enabled=%s]", id, userEmail, password,
                 role, enabled);
     }
 

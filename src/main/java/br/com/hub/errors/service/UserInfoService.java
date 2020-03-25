@@ -16,31 +16,21 @@ public class UserInfoService {
     @Autowired
     private UserDetailsRepository userDatailsRepository;
 
-    public UserInfo getUserInfoByUserName(String userName) {
+    public UserInfo getUserInfoByUserEmail(String userEmail) {
         short enabled = 1;
-        return userDatailsRepository.findByUserNameAndEnabled(userName, enabled);
+        return userDatailsRepository.findByUserEmailAndEnabled(userEmail, enabled);
+    }
+
+    public UserInfo getUserByUserId(Integer id) {
+        return userDatailsRepository.findById(id);
     }
 
     public List<UserInfo> getAllActiveUserInfo() {
         return userDatailsRepository.findAllByEnabled((short) 1);
     }
 
-    public UserInfo getUserInfoById(Integer id) {
-        return userDatailsRepository.findById(id);
-    }
-
     public UserInfo addUser(UserInfo userInfo) {
-        //TODO: VERIFICAR SE O USUARIO JA EXISTE.
         userInfo.setPassword(new BCryptPasswordEncoder().encode(userInfo.getPassword()));
-        return userDatailsRepository.save(userInfo);
-    }
-
-    public UserInfo updateUser(Integer id, UserInfo userRecord) {
-        UserInfo userInfo = userDatailsRepository.findById(id);
-        userInfo.setUserName(userRecord.getUserName());
-        userInfo.setPassword(userRecord.getPassword());
-        userInfo.setRole(userRecord.getRole());
-        userInfo.setEnabled(userRecord.getEnabled());
         return userDatailsRepository.save(userInfo);
     }
 

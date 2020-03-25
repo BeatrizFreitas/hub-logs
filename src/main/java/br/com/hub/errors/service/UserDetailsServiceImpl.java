@@ -20,9 +20,9 @@ public class UserDetailsServiceImpl implements UserDetailsService {
     private UserInfoService userInfoDAO;
 
     @Override
-    public UserDetails loadUserByUsername(String userName) throws UsernameNotFoundException {
-        UserInfo userInfo = userInfoDAO.getUserInfoByUserName(userName);
+    public UserDetails loadUserByUsername(String userEmail) throws UsernameNotFoundException {
+        UserInfo userInfo = userInfoDAO.getUserInfoByUserEmail(userEmail);
         GrantedAuthority authority = new SimpleGrantedAuthority(userInfo.getRole());
-        return new User(userInfo.getUserName(), userInfo.getPassword(), Arrays.asList(authority));
+        return new User(userInfo.getUserEmail(), userInfo.getPassword(), Arrays.asList(authority));
     }
 }

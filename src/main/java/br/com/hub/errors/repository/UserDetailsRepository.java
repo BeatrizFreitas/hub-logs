@@ -12,14 +12,11 @@ import org.springframework.stereotype.Repository;
 @Repository
 @Transactional
 public interface UserDetailsRepository extends CrudRepository<UserInfo, String> {
-    public UserInfo findByUserNameAndEnabled(String userName, short enabled);
+    public UserInfo findByUserEmailAndEnabled(String userEmail, short enabled);
 
     public List<UserInfo> findAllByEnabled(short enabled);
 
     public UserInfo findById(Integer id);
-//
-//	@Override
-//	public UserInfo save(UserInfo userInfo);
 
-    public void deleteById(Integer id);
+    void deleteById(Integer id);
 }
