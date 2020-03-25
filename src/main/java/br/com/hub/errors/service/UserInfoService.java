@@ -30,6 +30,7 @@ public class UserInfoService {
     }
 
     public UserInfo addUser(UserInfo userInfo) {
+        //TODO: VERIFICAR SE O USUARIO JA EXISTE.
         userInfo.setPassword(new BCryptPasswordEncoder().encode(userInfo.getPassword()));
         return userDatailsRepository.save(userInfo);
     }
