@@ -37,7 +37,4 @@ public class Log implements Serializable {
     @Column
     private EnvironmentEnum environment;
 
-    @ManyToOne(cascade=CascadeType.ALL)
-    @JoinColumn(name = "userId", referencedColumnName = "id") //nullable=false
-    private User user;
 }
