@@ -1,7 +1,7 @@
 package br.com.hub.errors.controller;
 
 import br.com.hub.errors.model.Log;
-import br.com.hub.errors.dto.LogDTO;
+import br.com.hub.errors.dto.request.LogDTORequest;
 import br.com.hub.errors.service.LogService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -32,11 +32,11 @@ public class LogController {
     @GetMapping("/logs")
     @ApiOperation(value = "Returns a list of logs")
     @ResponseBody
-    public List<LogDTO> getLogs(@RequestParam(value = "page", required = false, defaultValue = "0") int page,
-                                 @RequestParam(value = "size", required = false, defaultValue = "10") int size){
+    public List<LogDTORequest> getLogs(@RequestParam(value = "page", required = false, defaultValue = "0") int page,
+                                       @RequestParam(value = "size", required = false, defaultValue = "10") int size){
 
         Page<Log> logs = logService.getLogsList(page, size);
-        List<LogDTO> listLogdTO = logs.stream()
+        List<LogDTORequest> listLogdTO = logs.stream()
                 .map(this::convertToDto)
                 .collect(Collectors.toList());
 
@@ -45,26 +45,26 @@ public class LogController {
 
     @PostMapping("/logs")
     @ApiOperation(value = "Creates a new log")
-    @ApiResponse(code = 201, message = "Log salvo com sucesso", response = LogDTO.class)
+    @ApiResponse(code = 201, message = "LOG SAVED SUCCESSFULLY", response = LogDTORequest.class)
     @ResponseStatus(HttpStatus.CREATED)
-    public LogDTO saveLog(@Valid @RequestBody LogDTO logDto){
-        Log log = convertToEntity(logDto);
+    public LogDTORequest saveLog(@Valid @RequestBody LogDTORequest logDtoRequest){
+        Log log = convertToEntity(logDtoRequest);
         Log logCreated = logService.registerLog(log);
         return convertToDto(logCreated);
     }
 
     @GetMapping("/logs/find_by")
     @ApiOperation(value = "Returns a list of logs according to the requested filters")
-    public List<LogDTO> findLogs(@RequestParam Map<String,String> allParams,
-                                 @RequestParam(value = "page", required = false, defaultValue = "0") int page,
-                                 @RequestParam(value = "size", required = false, defaultValue = "10") int size) {
+    public List<LogDTORequest> findLogs(@RequestParam Map<String,String> allParams,
+                                        @RequestParam(value = "page", required = false, defaultValue = "0") int page,
+                                        @RequestParam(value = "size", required = false, defaultValue = "10") int size) {
 
         Page<Log> logs = logService.filterLogs(allParams, page, size);
-        List<LogDTO> listLogdTO = logs.stream()
+        List<LogDTORequest> listLogdTO = logs.stream()
                 .map(this::convertToDto)
                 .collect(Collectors.toList());
 
-        Page<LogDTO> pageLog = new PageImpl<>(listLogdTO);
+        Page<LogDTORequest> pageLog = new PageImpl<>(listLogdTO);
 
         return pageLog.getContent();
 
@@ -72,25 +72,25 @@ public class LogController {
 
     @GetMapping("/logs/order_by")
     @ApiOperation(value = "Returns an ordered list of logs")
-    public List<LogDTO> sortLogs(@RequestParam Map<String,String> allParams,
-                                 @RequestParam(value = "page", required = false, defaultValue = "0") int page,
-                                 @RequestParam(value = "size", required = false, defaultValue = "10") int size) {
+    public List<LogDTORequest> sortLogs(@RequestParam Map<String,String> allParams,
+                                        @RequestParam(value = "page", required = false, defaultValue = "0") int page,
+                                        @RequestParam(value = "size", required = false, defaultValue = "10") int size) {
         String paramName = getParameterSort(allParams);
 
         Page<Log> logs = logService.sortLogs(paramName, page, size);
 
-        List<LogDTO> listLogdTO = logs.getContent().stream()
+        List<LogDTORequest> listLogdTO = logs.getContent().stream()
                 .map(this::convertToDto)
                 .collect(Collectors.toList());
 
-        Page<LogDTO> pageLog = new PageImpl<>(listLogdTO);
+        Page<LogDTORequest> pageLog = new PageImpl<>(listLogdTO);
 
         return pageLog.getContent();
     }
 
-    private LogDTO convertToDto(Log log) { return modelMapper.map(log, LogDTO.class); }
+    private LogDTORequest convertToDto(Log log) { return modelMapper.map(log, LogDTORequest.class); }
 
-    private Log convertToEntity(LogDTO logDto) { return modelMapper.map(logDto, Log.class); }
+    private Log convertToEntity(LogDTORequest logDtoRequest) { return modelMapper.map(logDtoRequest, Log.class); }
 
     private static String getParameterSort(Map<String, String> params) { return params.get("order_by");}
 
