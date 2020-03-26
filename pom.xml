@@ -137,9 +137,6 @@
 					<url>${database.url}</url>
 					<user>${database.user}</user>
 					<password>${database.password}</password>
-					<schemas>
-						<schema>schemaBanco</schema>
-					</schemas>
 				</configuration>
 			</plugin>
 		</plugins>

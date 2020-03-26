@@ -32,6 +32,8 @@ public class UserInfo implements Serializable {
     @Column
     private String password;
     @Column
+    private String name;
+    @Column
     private String role;
     @Column
     private short enabled;
