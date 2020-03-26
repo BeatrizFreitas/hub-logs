@@ -1,1 +1,1 @@
-INSERT INTO tb_user (id, name, last_name, login, password, token) VALUES ('25800dd8-1223-4986-806b-a444ffe953b1', 'Ada', 'Lovelace', 'adtestemigration@gmail.com', '123456', 'token1');
+INSERT INTO tb_log (id, error_level, description, origin, frequency, environment) VALUES ('ea7394d3-1bf4-48e6-88c2-f7fec21f48c6', 'W', 'Description of the error that occurred', '168.100.35.29', 3, 'D');

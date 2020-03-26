@@ -1,12 +1,10 @@
--- Domain: public.error_levels
-
--- DROP DOMAIN public.error_levels;
-
-CREATE DOMAIN public.error_levels
-AS character(1)
-COLLATE pg_catalog."default"
-CONSTRAINT check_error_levels CHECK (VALUE = 'D'::bpchar OR VALUE = 'W'::bpchar OR VALUE = 'E'::bpchar);
-ALTER DOMAIN public.error_levels
-OWNER TO postgres;
-COMMENT ON DOMAIN public.error_levels
-IS 'ERROR LEVELS: (D)ebug, (W)arning, (E)rror';
+CREATE TABLE tb_log (
+  id uuid NOT NULL,
+  occurrence_date timestamp without time zone DEFAULT now() NOT NULL,
+  error_level error_levels,
+  description character varying(255),
+  origin character varying(80),
+  frequency integer,
+  environment environments,
+  CONSTRAINT tb_log_pkey PRIMARY KEY (id)
+)
