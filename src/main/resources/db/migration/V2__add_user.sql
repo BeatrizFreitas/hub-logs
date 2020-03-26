@@ -1,1 +1,1 @@
-INSERT INTO tb_user (id, name, last_name, login, password, token) VALUES ('25800dd8-1223-4986-806b-a444ffe953b1', 'Ada', 'Lovelace', 'adtestemigration@gmail.com', '123456', 'token1');
+INSERT INTO tb_user (id, user_name, user_email, password) VALUES ('25800dd8-1223-4986-806b-a444ffe953b1', 'Louise', 'louisetesteemail@gmail.com', '123456');
