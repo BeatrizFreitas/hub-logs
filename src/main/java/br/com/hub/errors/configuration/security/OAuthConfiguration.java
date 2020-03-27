@@ -36,8 +36,8 @@ public class OAuthConfiguration extends AuthorizationServerConfigurerAdapter {
                 .secret(new BCryptPasswordEncoder().encode("client_secret"))
                 .authorizedGrantTypes("password", "authorization_code", "refresh_token")
                 .scopes("read","write")
-                .accessTokenValiditySeconds(600)
-                .refreshTokenValiditySeconds(3600);
+                .accessTokenValiditySeconds(432000)
+                .refreshTokenValiditySeconds(432000);
     }
     @Override
     public void configure(final AuthorizationServerEndpointsConfigurer endpoints) throws Exception {
