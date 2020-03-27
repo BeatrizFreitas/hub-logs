@@ -2,7 +2,7 @@ package br.com.hub.errors.service;
 
 import java.util.List;
 
-import br.com.hub.errors.model.UserInfo;
+import br.com.hub.errors.model.User;
 import br.com.hub.errors.repository.UserDetailsRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -16,37 +16,37 @@ public class UserInfoService {
     @Autowired
     private UserDetailsRepository userDatailsRepository;
 
-    public UserInfo getUserInfoByUserEmail(String userEmail) {
+    public User getUserInfoByUserEmail(String userEmail) {
         short enabled = 1;
         return userDatailsRepository.findByUserEmailAndEnabled(userEmail, enabled);
     }
 
-    public UserInfo getUserByUserId(Integer id) {
+    public User getUserByUserId(Integer id) {
         return userDatailsRepository.findById(id);
     }
 
-    public List<UserInfo> getAllActiveUserInfo() {
+    public List<User> getAllActiveUserInfo() {
         return userDatailsRepository.findAllByEnabled((short) 1);
     }
 
-    public UserInfo addUser(UserInfo userInfo) {
-        userInfo.setPassword(new BCryptPasswordEncoder().encode(userInfo.getPassword()));
-        return userDatailsRepository.save(userInfo);
+    public User addUser(User user) {
+        user.setPassword(new BCryptPasswordEncoder().encode(user.getPassword()));
+        return userDatailsRepository.save(user);
     }
 
     public void deleteUser(Integer id) {
         userDatailsRepository.deleteById(id);
     }
 
-    public UserInfo updatePassword(Integer id, UserInfo userRecord) {
-        UserInfo userInfo = userDatailsRepository.findById(id);
-        userInfo.setPassword(userRecord.getPassword());
-        return userDatailsRepository.save(userInfo);
+    public User updatePassword(Integer id, User userRecord) {
+        User user = userDatailsRepository.findById(id);
+        user.setPassword(userRecord.getPassword());
+        return userDatailsRepository.save(user);
     }
 
-    public UserInfo updateRole(Integer id, UserInfo userRecord) {
-        UserInfo userInfo = userDatailsRepository.findById(id);
-        userInfo.setRole(userRecord.getRole());
-        return userDatailsRepository.save(userInfo);
+    public User updateRole(Integer id, User userRecord) {
+        User user = userDatailsRepository.findById(id);
+        user.setRole(userRecord.getRole());
+        return userDatailsRepository.save(user);
     }
 }

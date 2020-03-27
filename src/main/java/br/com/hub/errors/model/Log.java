@@ -33,11 +33,5 @@ public class Log implements Serializable {
     @Column
     private String origin;
     @Column
-    private Integer frequency;
-    @Column
     private EnvironmentEnum environment;
-
-//    @ManyToOne(cascade=CascadeType.ALL)
-//    @JoinColumn(name = "userId", referencedColumnName = "id") //nullable=false
-//    private UserInfo user;
 }

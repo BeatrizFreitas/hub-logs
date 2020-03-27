@@ -5,7 +5,7 @@ import java.util.List;
 
 import br.com.hub.errors.dto.request.UserDTORequest;
 import br.com.hub.errors.dto.response.UserDTOResponse;
-import br.com.hub.errors.model.UserInfo;
+import br.com.hub.errors.model.User;
 import br.com.hub.errors.service.UserInfoService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -32,9 +32,9 @@ public class UserController {
     @ApiResponse(code = 201, message = "Successfully created user.", response = UserDTOResponse.class)
     @ResponseStatus(HttpStatus.CREATED)
     public UserDTOResponse addUser(@RequestBody UserDTORequest userDTORequest) {
-        UserInfo newUser;
-        UserInfo userInfo = userService.getUserInfoByUserEmail(userDTORequest.getUserEmail());
-        UserInfo user = convertToEntity(userDTORequest);
+        User newUser;
+        User userInfo = userService.getUserInfoByUserEmail(userDTORequest.getUserEmail());
+        User user = convertToEntity(userDTORequest);
 
         if (userInfo == null) {
             newUser = userService.addUser(user);
@@ -48,11 +48,11 @@ public class UserController {
     @ApiOperation(value = "Returns a list of registered users.")
     @GetMapping("api/user")
     public Object getAllUser(@RequestHeader HttpHeaders requestHeader) {
-        List<UserInfo> userInfos = userService.getAllActiveUserInfo();
-        if (userInfos == null || userInfos.isEmpty()) {
+        List<User> users = userService.getAllActiveUserInfo();
+        if (users == null || users.isEmpty()) {
             return new ResponseEntity<Void>(HttpStatus.NO_CONTENT);
         }
-        return userInfos;
+        return users;
     }
 
     @ApiOperation(value="Allows you to change the password of a registered user.")
@@ -60,9 +60,9 @@ public class UserController {
     @ApiResponse(code = 201, message = "Password successfully updated", response = UserDTOResponse.class)
     @ResponseStatus(HttpStatus.OK)
     public UserDTOResponse updateUserPassword(@RequestBody UserDTORequest userDTORequest, @PathVariable Integer id) {
-        UserInfo userUpdated;
-        UserInfo userInfo = userService.getUserByUserId(id);
-        UserInfo user = convertToEntity(userDTORequest);
+        User userUpdated;
+        User userInfo = userService.getUserByUserId(id);
+        User user = convertToEntity(userDTORequest);
 
         if (userInfo != null) {
             userUpdated = userService.updatePassword(id, user);
@@ -78,9 +78,9 @@ public class UserController {
     @ApiResponse(code = 201, message = "Role successfully updated", response = UserDTOResponse.class)
     @ResponseStatus(HttpStatus.OK)
     public UserDTOResponse updateUserRole(@RequestBody UserDTORequest userDTORequest, @PathVariable Integer id) {
-        UserInfo userUpdated;
-        UserInfo userInfo = userService.getUserByUserId(id);
-        UserInfo user = convertToEntity(userDTORequest);
+        User userUpdated;
+        User userInfo = userService.getUserByUserId(id);
+        User user = convertToEntity(userDTORequest);
 
         if (userInfo != null) {
             userUpdated = userService.updateRole(id, user);
@@ -95,9 +95,9 @@ public class UserController {
     @DeleteMapping("api/user/{id}")
     @ResponseStatus(HttpStatus.OK)
     public void deleteUser(@PathVariable Integer id) {
-        UserInfo userInfo = userService.getUserByUserId(id);
+        User user = userService.getUserByUserId(id);
 
-        if (userInfo != null) {
+        if (user != null) {
             userService.deleteUser(id);
         } else {
             throw new ResponseStatusException(
@@ -105,7 +105,7 @@ public class UserController {
         }
     }
 
-    private UserDTOResponse convertToDto(UserInfo userInfo ) { return modelMapper.map(userInfo, UserDTOResponse.class); }
+    private UserDTOResponse convertToDto(User user) { return modelMapper.map(user, UserDTOResponse.class); }
 
-    private UserInfo convertToEntity(UserDTORequest userDTORequest) { return modelMapper.map(userDTORequest, UserInfo.class); }
+    private User convertToEntity(UserDTORequest userDTORequest) { return modelMapper.map(userDTORequest, User.class); }
 }
