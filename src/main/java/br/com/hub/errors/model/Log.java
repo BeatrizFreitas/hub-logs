@@ -1,7 +1,7 @@
 package br.com.hub.errors.model;
 
 import br.com.hub.errors.model.enum_model.ErrorLevelsEnum;
-import br.com.hub.errors.model.enum_model.EnvironmentEnum;
+import br.com.hub.errors.model.enum_model.EnvironmentsEnum;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -33,11 +33,6 @@ public class Log implements Serializable {
     @Column
     private String origin;
     @Column
-    private Integer frequency;
-    @Column
-    private EnvironmentEnum environment;
+    private EnvironmentsEnum environment;
 
-//    @ManyToOne(cascade=CascadeType.ALL)
-//    @JoinColumn(name = "userId", referencedColumnName = "id") //nullable=false
-//    private UserInfo user;
 }

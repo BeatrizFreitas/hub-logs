@@ -1,7 +1,7 @@
 package br.com.hub.errors.dto.request;
 
 import br.com.hub.errors.model.enum_model.ErrorLevelsEnum;
-import br.com.hub.errors.model.enum_model.EnvironmentEnum;
+import br.com.hub.errors.model.enum_model.EnvironmentsEnum;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -37,6 +37,6 @@ public class LogDTORequest {
 
     @NotNull(message = "Environment not informed (DEVELOPMENT, PRODUCTION, HOMOLOGATION")
     @Column
-    private EnvironmentEnum environment;
+    private EnvironmentsEnum environment;
 
 }

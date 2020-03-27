@@ -49,6 +49,8 @@ public class LogController {
     @ResponseStatus(HttpStatus.CREATED)
     public LogDTORequest saveLog(@Valid @RequestBody LogDTORequest logDtoRequest){
         Log log = convertToEntity(logDtoRequest);
+        System.out.println("AQUIII"+log);
+
         Log logCreated = logService.registerLog(log);
         return convertToDto(logCreated);
     }

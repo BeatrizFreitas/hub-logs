@@ -18,17 +18,19 @@ import javax.validation.constraints.Email;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "users")
-public class UserInfo implements Serializable {
+@Table(name = "TB_USER")
+public class User implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
     @Column
     @Email
     private String userEmail;
+    @Column
+    private String name;
     @Column
     private String password;
     @Column

@@ -3,7 +3,7 @@ package br.com.hub.errors.specification;
 import br.com.hub.errors.model.Log;
 
 import br.com.hub.errors.model.Log_;
-import br.com.hub.errors.model.enum_model.EnvironmentEnum;
+import br.com.hub.errors.model.enum_model.EnvironmentsEnum;
 import br.com.hub.errors.model.enum_model.ErrorLevelsEnum;
 import br.com.hub.errors.service.LogService;
 import org.jboss.logging.Logger;
@@ -54,7 +54,7 @@ public class LogSpecs {
         }
         if (params.get("environment") != null && !params.get("environment").isEmpty()) {
             predicates.add(criteriaBuilder.equal(root.get(Log_.environment),
-                    EnvironmentEnum.valueOf(params.get("environment"))));
+                    EnvironmentsEnum.valueOf(params.get("environment"))));
         }
 
         return predicates;
