@@ -1,6 +1,5 @@
 package br.com.hub.errors.model;
 
-import br.com.hub.errors.model.enum_model.RoleEnum;
 import lombok.*;
 
 import java.io.Serializable;
@@ -19,16 +18,18 @@ import javax.validation.constraints.Email;
 public class User implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
     @Column
     @Email
     private String userEmail;
     @Column
+    private String name;
+    @Column
     private String password;
     @Column
-    private RoleEnum role;
+    private String role;
     @Column
     private short enabled;
 

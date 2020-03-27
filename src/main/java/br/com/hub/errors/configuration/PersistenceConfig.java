@@ -18,6 +18,6 @@ public class PersistenceConfig {
     @Bean
     public UserDetailsService userDetailsService() {
         return new UserDetailsServiceImpl();
-    };
+    }
 
 }

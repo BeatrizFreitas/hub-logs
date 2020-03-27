@@ -1,7 +1,7 @@
 package br.com.hub.errors.model.enum_model;
 
-public enum EnvironmentEnum {
+public enum EnvironmentsEnum {
     DEVELOPMENT('D'), PRODUCTION('P'), HOMOLOGATION('H');
 
-    EnvironmentEnum(Character c){}
+    EnvironmentsEnum(Character c){}
 }

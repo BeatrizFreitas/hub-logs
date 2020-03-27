@@ -1,7 +1,5 @@
 package br.com.hub.errors.dto.request;
 
-import br.com.hub.errors.model.enum_model.ErrorLevelsEnum;
-import br.com.hub.errors.model.enum_model.RoleEnum;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -26,7 +24,7 @@ public class UserDTORequest {
     private String password;
 
     @NotNull(message = "Role is not informed (USER or ADMIN)")
-    private RoleEnum role;
+    private String role;
 
     @NotNull(message = "enabled is a required parameter")
     @Column
