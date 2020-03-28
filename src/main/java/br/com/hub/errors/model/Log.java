@@ -33,5 +33,5 @@ public class Log implements Serializable {
     @Column
     private String origin;
     @Column
-    private EnvironmentsEnum environments;
+    private EnvironmentsEnum environment;
 }
