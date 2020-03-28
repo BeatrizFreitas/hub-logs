@@ -38,6 +38,13 @@ public class User implements Serializable {
     @Column
     private short enabled;
 
+    public User(Integer id, String name, String userEmail, String role) {
+        this.id = id;
+        this.name = name;
+        this.userEmail = userEmail;
+        this.role = role;
+    }
+
     @Override
     public String toString() {
         return String.format("UserInfo [id=%s, userEmail=%s, password=%s, role=%s, enabled=%s]", id, userEmail, password,
