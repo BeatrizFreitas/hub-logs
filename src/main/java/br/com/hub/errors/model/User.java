@@ -4,13 +4,9 @@ import lombok.*;
 
 import java.io.Serializable;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 import javax.validation.constraints.Email;
+
 
 
 @Getter
@@ -21,7 +17,6 @@ import javax.validation.constraints.Email;
 @Table(name = "TB_USER")
 public class User implements Serializable {
     private static final long serialVersionUID = 1L;
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
@@ -47,8 +42,7 @@ public class User implements Serializable {
 
     @Override
     public String toString() {
-        return String.format("UserInfo [id=%s, userEmail=%s, password=%s, role=%s, enabled=%s]", id, userEmail, password,
-                role, enabled);
+        return String.format("UserInfo [id=%s, userEmail=%s, password=%s, role=%s, enabled=%s]", id, userEmail, password, enabled);
     }
 
 }

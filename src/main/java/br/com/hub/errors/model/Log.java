@@ -1,7 +1,7 @@
 package br.com.hub.errors.model;
 
-import br.com.hub.errors.model.enum_model.ErrorLevelsEnum;
 import br.com.hub.errors.model.enum_model.EnvironmentsEnum;
+import br.com.hub.errors.model.enum_model.ErrorLevelsEnum;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -34,5 +34,4 @@ public class Log implements Serializable {
     private String origin;
     @Column
     private EnvironmentsEnum environment;
-
 }
