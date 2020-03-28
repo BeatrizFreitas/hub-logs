@@ -46,6 +46,12 @@ public class UserController {
     }
 
     @ApiOperation(value = "Returns a list of registered users.")
+    @GetMapping("/teste")
+    public String init() {
+        return "ola";
+    }
+
+    @ApiOperation(value = "Returns a list of registered users.")
     @GetMapping("api/user")
     public Object getAllUser(@RequestHeader HttpHeaders requestHeader) {
         List<User> users = userService.getAllActiveUserInfo();
