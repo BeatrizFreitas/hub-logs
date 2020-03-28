@@ -1,6 +1,8 @@
 package br.com.hub.errors.model;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.*;
+import org.codehaus.jackson.annotate.JsonIgnore;
 
 import java.io.Serializable;
 
@@ -27,6 +29,7 @@ public class User implements Serializable {
     @Column
     private String name;
     @Column
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private String password;
     @Column
     private String role;

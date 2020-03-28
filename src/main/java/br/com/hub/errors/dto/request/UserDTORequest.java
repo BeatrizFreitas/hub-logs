@@ -15,6 +15,10 @@ public class UserDTORequest {
 
     private Long id;
 
+    @NotNull(message = "Name is a required parameter")
+    @Size(min = 3)
+    private String name;
+
     @NotNull(message = "Email is a required parameter")
     @Email
     private String userEmail;
